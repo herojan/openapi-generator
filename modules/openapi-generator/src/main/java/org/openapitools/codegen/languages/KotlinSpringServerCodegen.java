@@ -20,6 +20,7 @@ import com.google.common.collect.ImmutableMap;
 import com.samskivert.mustache.Mustache;
 import com.samskivert.mustache.Template;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.Operation;
 import io.swagger.v3.oas.models.media.Schema;
 import org.openapitools.codegen.*;
 import org.openapitools.codegen.languages.features.BeanValidationFeatures;
@@ -371,6 +372,23 @@ public class KotlinSpringServerCodegen extends AbstractKotlinCodegen
             LOGGER.warn("The lambda property is a reserved word, and will be overwritten!");
         }
         objs.put(LAMBDA, lambdas);
+    }
+
+    @Override
+    public CodegenOperation fromOperation(String path,
+                                          String httpMethod,
+                                          Operation operation,
+                                          Map<String, Schema> schemas,
+                                          OpenAPI openAPI) {
+        CodegenOperation op = super.fromOperation(path, httpMethod, operation, schemas, openAPI);
+
+        op.allParams.forEach(param -> {
+            if (param.isBodyParam || param.isFormParam) {
+                    param.required = true;
+            }
+        });
+
+        return op;
     }
 
     @Override

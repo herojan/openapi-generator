@@ -136,7 +136,7 @@ class PetApiController(@Autowired(required = true) val service: PetApiService) {
             value = ["/pet/{petId}"],
             consumes = ["application/x-www-form-urlencoded"],
             method = [RequestMethod.POST])
-    fun updatePetWithForm(@ApiParam(value = "ID of pet that needs to be updated", required=true) @PathVariable("petId") petId: Long,@ApiParam(value = "Updated name of the pet", defaultValue="null") @RequestParam(value="name", required=false) name: String ,@ApiParam(value = "Updated status of the pet", defaultValue="null") @RequestParam(value="status", required=false) status: String ): ResponseEntity<Unit> {
+    fun updatePetWithForm(@ApiParam(value = "ID of pet that needs to be updated", required=true) @PathVariable("petId") petId: Long,@ApiParam(value = "Updated name of the pet", required=true, defaultValue="null") @RequestParam(value="name", required=true) name: String ,@ApiParam(value = "Updated status of the pet", required=true, defaultValue="null") @RequestParam(value="status", required=true) status: String ): ResponseEntity<Unit> {
         return ResponseEntity(service.updatePetWithForm(petId, name, status), HttpStatus.OK)
     }
 
@@ -153,7 +153,7 @@ class PetApiController(@Autowired(required = true) val service: PetApiService) {
             produces = ["application/json"], 
             consumes = ["multipart/form-data"],
             method = [RequestMethod.POST])
-    fun uploadFile(@ApiParam(value = "ID of pet to update", required=true) @PathVariable("petId") petId: Long,@ApiParam(value = "Additional data to pass to server", defaultValue="null") @RequestParam(value="additionalMetadata", required=false) additionalMetadata: String ,@ApiParam(value = "file detail") @Valid @RequestPart("file") file: MultipartFile): ResponseEntity<ModelApiResponse> {
+    fun uploadFile(@ApiParam(value = "ID of pet to update", required=true) @PathVariable("petId") petId: Long,@ApiParam(value = "Additional data to pass to server", required=true, defaultValue="null") @RequestParam(value="additionalMetadata", required=true) additionalMetadata: String ,@ApiParam(value = "file detail") @Valid @RequestPart("file") file: MultipartFile): ResponseEntity<ModelApiResponse> {
         return ResponseEntity(service.uploadFile(petId, additionalMetadata, file), HttpStatus.OK)
     }
 }
