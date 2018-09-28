@@ -4,7 +4,13 @@ import java.util.Objects
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonValue
 import javax.validation.Valid
-import javax.validation.constraints.*
+import javax.validation.constraints.Max
+import javax.validation.constraints.Min
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import io.swagger.annotations.ApiModelProperty
 
 /**
@@ -18,23 +24,17 @@ import io.swagger.annotations.ApiModelProperty
  */
 data class Order (
 
-        @ApiModelProperty(value = "")
-        @JsonProperty("id") val id: Long? = null,
+        @ApiModelProperty(value = "")@JsonProperty("id") val id: Long? = null,
 
-        @ApiModelProperty(value = "")
-        @JsonProperty("petId") val petId: Long? = null,
+        @ApiModelProperty(value = "")@JsonProperty("petId") val petId: Long? = null,
 
-        @ApiModelProperty(value = "")
-        @JsonProperty("quantity") val quantity: Int? = null,
+        @ApiModelProperty(value = "")@JsonProperty("quantity") val quantity: Int? = null,
 
-        @ApiModelProperty(value = "")
-        @JsonProperty("shipDate") val shipDate: java.time.OffsetDateTime? = null,
+        @ApiModelProperty(value = "")@JsonProperty("shipDate") val shipDate: java.time.OffsetDateTime? = null,
 
-        @ApiModelProperty(value = "Order Status")
-        @JsonProperty("status") val status: Order.Status? = null,
+        @ApiModelProperty(value = "Order Status")@JsonProperty("status") val status: Order.Status? = null,
 
-        @ApiModelProperty(value = "")
-        @JsonProperty("complete") val complete: Boolean? = null
+        @ApiModelProperty(value = "")@JsonProperty("complete") val complete: Boolean? = null
 ) {
 
     /**

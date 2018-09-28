@@ -19,7 +19,15 @@ import org.springframework.web.multipart.MultipartFile
 import org.springframework.beans.factory.annotation.Autowired
 
 import javax.validation.Valid
-import javax.validation.constraints.*
+import javax.validation.constraints.Max
+import javax.validation.constraints.Min
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.DecimalMax;
 
 import kotlin.collections.List
 import kotlin.collections.Map
@@ -28,7 +36,7 @@ import kotlin.collections.Map
 @Validated
 @Api(value = "Store", description = "The Store API")
 @RequestMapping("\${api.base-path:/v2}")
-class StoreApiController(@Autowired(required = true) val service: StoreApiService) {
+class StoreApi(@Autowired(required = true) val service: StoreApiService) {
 
     @ApiOperation(
             value = "Delete purchase order by ID",
